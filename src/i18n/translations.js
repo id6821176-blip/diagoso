@@ -1,0 +1,455 @@
+// DIAGOSO - Traductions multilingues
+// Français (fr) | Bambara (bm) | Arabe (ar)
+
+export const translations = {
+  fr: {
+    // Navigation
+    dashboard: "Tableau de bord",
+    products: "Produits",
+    orders: "Commandes",
+    invoices: "Factures",
+    shop: "Ma Boutique",
+    settings: "Paramètres",
+    logout: "Déconnexion",
+    notifications: "Notifications",
+
+    // Auth
+    login: "Connexion",
+    register: "S'inscrire",
+    email: "Email",
+    password: "Mot de passe",
+    confirmPassword: "Confirmer le mot de passe",
+    fullName: "Nom complet",
+    phone: "Téléphone",
+    shopName: "Nom de la boutique",
+    alreadyAccount: "Déjà un compte ?",
+    noAccount: "Pas encore de compte ?",
+    forgotPassword: "Mot de passe oublié ?",
+
+    // Subscription
+    subscriptionTitle: "Abonnement DIAGOSO",
+    subscriptionDesc: "En vous inscrivant, vous acceptez de payer 10 000 FCFA par mois pour utiliser la plateforme DIAGOSO. Une facture vous sera envoyée chaque fin de mois.",
+    subscriptionAccept: "J'accepte de payer 10 000 FCFA/mois",
+    subscriptionMonthly: "10 000 FCFA / mois",
+    trialPeriod: "30 jours d'essai gratuit",
+
+    // Dashboard
+    totalRevenue: "Revenu Total",
+    totalOrders: "Commandes",
+    totalProducts: "Produits",
+    pendingOrders: "En attente",
+    todaySales: "Ventes aujourd'hui",
+    thisMonth: "Ce mois",
+    recentOrders: "Commandes récentes",
+    topProducts: "Produits vedettes",
+    lowStock: "Stock faible",
+    welcomeBack: "Bon retour",
+
+    // Products
+    addProduct: "Ajouter un produit",
+    editProduct: "Modifier le produit",
+    productName: "Nom du produit",
+    description: "Description",
+    price: "Prix (FCFA)",
+    comparePrice: "Prix barré",
+    stock: "Stock",
+    category: "Catégorie",
+    images: "Images",
+    active: "Actif",
+    inactive: "Inactif",
+    save: "Enregistrer",
+    cancel: "Annuler",
+    delete: "Supprimer",
+    confirm: "Confirmer",
+    stockAlert: "Alerte stock bas",
+    outOfStock: "Rupture de stock",
+    inStock: "En stock",
+
+    // Orders
+    newOrder: "Nouvelle commande",
+    orderNumber: "N° Commande",
+    customer: "Client",
+    customerName: "Nom du client",
+    customerPhone: "Téléphone client",
+    customerAddress: "Adresse de livraison",
+    orderStatus: "Statut",
+    paymentMethod: "Paiement",
+    paymentStatus: "Statut paiement",
+    total: "Total",
+    subtotal: "Sous-total",
+    deliveryFee: "Frais de livraison",
+    notes: "Notes",
+    pending: "En attente",
+    confirmed: "Confirmée",
+    processing: "En traitement",
+    shipped: "Expédiée",
+    delivered: "Livrée",
+    cancelled: "Annulée",
+    paid: "Payée",
+    unpaid: "Non payée",
+    cash: "Espèces",
+    orangeMoney: "Orange Money",
+    wave: "Wave",
+    moovMoney: "Moov Money",
+    addItem: "Ajouter un article",
+    quantity: "Quantité",
+    generateInvoice: "Générer facture PDF",
+
+    // Shop
+    shareShop: "Partager ma boutique",
+    copyLink: "Copier le lien",
+    qrCode: "Code QR",
+    shopPreview: "Aperçu boutique",
+    customizeShop: "Personnaliser",
+    theme: "Thème",
+    language: "Langue",
+
+    // Settings
+    profile: "Profil",
+    shopInfo: "Info boutique",
+    changePassword: "Changer mot de passe",
+    currentPassword: "Mot de passe actuel",
+    newPassword: "Nouveau mot de passe",
+    updateProfile: "Mettre à jour",
+
+    // Admin
+    allVendors: "Tous les vendeurs",
+    allOrders: "Toutes les commandes",
+    allInvoices: "Toutes les factures",
+    platformRevenue: "Revenu plateforme",
+    activeVendors: "Vendeurs actifs",
+    inactiveVendors: "Vendeurs inactifs",
+    totalVendors: "Total vendeurs",
+    generateMonthlyInvoices: "Générer factures du mois",
+    exportData: "Exporter données",
+
+    // Messages
+    success: "Succès",
+    error: "Erreur",
+    loading: "Chargement...",
+    noData: "Aucune donnée",
+    confirmDelete: "Êtes-vous sûr de vouloir supprimer ?",
+    savedSuccess: "Enregistré avec succès",
+    deletedSuccess: "Supprimé avec succès",
+    linkCopied: "Lien copié !",
+    orderCreated: "Commande créée",
+    productAdded: "Produit ajouté",
+    invoiceSent: "Facture envoyée",
+
+    // Categories
+    categories: {
+      clothing: "Vêtements",
+      food: "Alimentation",
+      electronics: "Électronique",
+      beauty: "Beauté & Soins",
+      home: "Maison & Décor",
+      jewelry: "Bijoux",
+      shoes: "Chaussures",
+      bags: "Sacs & Accessoires",
+      other: "Autre"
+    }
+  },
+
+  bm: {
+    // Navigation
+    dashboard: "Segin Yɔrɔ",
+    products: "Fɛnw",
+    orders: "Ɲinɛw",
+    invoices: "Sarali Sɛbɛw",
+    shop: "N ka Dugukolonba",
+    settings: "Labɛnni",
+    logout: "Bɔ",
+    notifications: "Kibaru",
+
+    // Auth
+    login: "Dɔ Siri",
+    register: "Tɔgɔ Sigi",
+    email: "Imɛli",
+    password: "Kunnafoniw Dɔnnɛ",
+    confirmPassword: "Kunnafoniw Dɔnnɛ Sɛgɛsɛgɛ",
+    fullName: "Tɔgɔ Bɛɛ",
+    phone: "Nɛgɛso",
+    shopName: "Dugukolonba Tɔgɔ",
+    alreadyAccount: "Dɔ b'i fe wɛrɛ ?",
+    noAccount: "Dɔ tɛ i fe fɔlɔ ?",
+    forgotPassword: "I ma i kunnafoniw ɲɛ ?",
+
+    // Subscription
+    subscriptionTitle: "DIAGOSO Sɔrɔli",
+    subscriptionDesc: "I ka tɔgɔ sigi tuma na, i b'i ka nɔ ta ko DIAGOSO baarakɛli kan i na sara wari 10 000 FCFA kalo kelen kelen na.",
+    subscriptionAccept: "N b'i ka nɔ ta, n na sara 10 000 FCFA kalo kelen kelen",
+    subscriptionMonthly: "10 000 FCFA / Kalo",
+    trialPeriod: "Tile 30 kɛli dɔ nɔgɔma",
+
+    // Dashboard
+    totalRevenue: "Wari Bɛɛ Lajɛlen",
+    totalOrders: "Ɲinɛw",
+    totalProducts: "Fɛnw",
+    pendingOrders: "Makɔnɔnen",
+    todaySales: "Bi Feere",
+    thisMonth: "Kalo Nin",
+    recentOrders: "Ɲinɛ Kura",
+    topProducts: "Fɛn Ɲumanw",
+    lowStock: "Fɛn Ka Dɔgɔ",
+    welcomeBack: "Bisimila",
+
+    // Products
+    addProduct: "Fɛn Fara",
+    editProduct: "Fɛn Yɛlɛma",
+    productName: "Fɛn Tɔgɔ",
+    description: "Fɔcogo",
+    price: "Jalikɔrɔ (FCFA)",
+    comparePrice: "Kɔrɔ Jalikɔrɔ",
+    stock: "Fɛn Sɔrɔ",
+    category: "Wɛrɛwɛrɛ",
+    images: "Jiridenw",
+    active: "Baara la",
+    inactive: "Baara tɛ",
+    save: "Mara",
+    cancel: "Daa Kɛ",
+    delete: "Bɔ",
+    confirm: "Dafa",
+    stockAlert: "Fɛn Ka Dɔgɔ Kibaru",
+    outOfStock: "Fɛn Banna",
+    inStock: "Fɛn B'A na",
+
+    // Orders
+    newOrder: "Ɲini Kura",
+    orderNumber: "Ɲini Nɔmɔrɔ",
+    customer: "Jatigi",
+    customerName: "Jatigi Tɔgɔ",
+    customerPhone: "Jatigi Nɛgɛso",
+    customerAddress: "Jatigi Sɔ",
+    orderStatus: "Cogoya",
+    paymentMethod: "Sarali Cogo",
+    paymentStatus: "Sarali Cogoya",
+    total: "Bɛɛ Lajɛlen",
+    subtotal: "Dɔgɔnin",
+    deliveryFee: "Labɔli Sara",
+    notes: "Daɲɛ",
+    pending: "Makɔnɔnen",
+    confirmed: "Dafalen",
+    processing: "Kɛcogo la",
+    shipped: "Taasen",
+    delivered: "Sɔrɔlen",
+    cancelled: "Jalaki Kɛlen",
+    paid: "Saralen",
+    unpaid: "Ma Sara",
+    cash: "Wari",
+    orangeMoney: "Orange Money",
+    wave: "Wave",
+    moovMoney: "Moov Money",
+    addItem: "Fɛn Dɔ Fara",
+    quantity: "Hakɛ",
+    generateInvoice: "Sarali Sɛbɛ Kɛ",
+
+    // Shop
+    shareShop: "N Dugukolonba Labɔ",
+    copyLink: "Sira Daɲɛ",
+    qrCode: "QR Kodu",
+    shopPreview: "Dugukolonba Lajɛ",
+    customizeShop: "Yɛlɛma",
+    theme: "Dɔnnikɛ Lɔgɔ",
+    language: "Kɔrɔkalan",
+
+    // Settings
+    profile: "I Yɛrɛ",
+    shopInfo: "Dugukolonba Kunnafoni",
+    changePassword: "Kunnafoniw Yɛlɛma",
+    currentPassword: "Kunnafoniw Kɔrɔ",
+    newPassword: "Kunnafoniw Kura",
+    updateProfile: "Labɛn",
+
+    // Admin
+    allVendors: "Feerelaw Bɛɛ",
+    allOrders: "Ɲinɛw Bɛɛ",
+    allInvoices: "Sarali Sɛbɛw Bɛɛ",
+    platformRevenue: "Jɛkulu Wari",
+    activeVendors: "Baara la Feerelaw",
+    inactiveVendors: "Baara tɛ Feerelaw",
+    totalVendors: "Feerelaw Hakɛ",
+    generateMonthlyInvoices: "Kalo Sarali Sɛbɛw Kɛ",
+    exportData: "Kunnafoniw Bɔ",
+
+    // Messages
+    success: "Dafa",
+    error: "Fili",
+    loading: "Makɔnɔnen...",
+    noData: "Kunnafoni Tɛ",
+    confirmDelete: "I b'a fɛ a bɔ ?",
+    savedSuccess: "Marabalen",
+    deletedSuccess: "Bɔlen",
+    linkCopied: "Sira Daɲɛlen !",
+    orderCreated: "Ɲini Kɛlen",
+    productAdded: "Fɛn Faralen",
+    invoiceSent: "Sɛbɛ Taasen",
+
+    categories: {
+      clothing: "Faniw",
+      food: "Dumunifɛnw",
+      electronics: "Masinkɛfɛnw",
+      beauty: "Nɔgɔ",
+      home: "Gwa fɛnw",
+      jewelry: "Miriya",
+      shoes: "Sɛnkɛw",
+      bags: "Jawuw",
+      other: "Wɛrɛw"
+    }
+  },
+
+  ar: {
+    // Navigation
+    dashboard: "لوحة التحكم",
+    products: "المنتجات",
+    orders: "الطلبات",
+    invoices: "الفواتير",
+    shop: "متجري",
+    settings: "الإعدادات",
+    logout: "تسجيل الخروج",
+    notifications: "الإشعارات",
+
+    // Auth
+    login: "تسجيل الدخول",
+    register: "إنشاء حساب",
+    email: "البريد الإلكتروني",
+    password: "كلمة المرور",
+    confirmPassword: "تأكيد كلمة المرور",
+    fullName: "الاسم الكامل",
+    phone: "رقم الهاتف",
+    shopName: "اسم المتجر",
+    alreadyAccount: "لديك حساب بالفعل؟",
+    noAccount: "ليس لديك حساب؟",
+    forgotPassword: "نسيت كلمة المرور؟",
+
+    // Subscription
+    subscriptionTitle: "الاشتراك في DIAGOSO",
+    subscriptionDesc: "بالتسجيل، تقبل دفع 10,000 فرنك أفريقي شهرياً لاستخدام منصة DIAGOSO. سيتم إرسال فاتورة لك في نهاية كل شهر.",
+    subscriptionAccept: "أقبل دفع 10,000 فرنك أفريقي شهرياً",
+    subscriptionMonthly: "10,000 فرنك / شهر",
+    trialPeriod: "30 يوماً مجاناً",
+
+    // Dashboard
+    totalRevenue: "إجمالي الإيرادات",
+    totalOrders: "الطلبات",
+    totalProducts: "المنتجات",
+    pendingOrders: "قيد الانتظار",
+    todaySales: "مبيعات اليوم",
+    thisMonth: "هذا الشهر",
+    recentOrders: "آخر الطلبات",
+    topProducts: "أفضل المنتجات",
+    lowStock: "مخزون منخفض",
+    welcomeBack: "مرحباً بعودتك",
+
+    // Products
+    addProduct: "إضافة منتج",
+    editProduct: "تعديل المنتج",
+    productName: "اسم المنتج",
+    description: "الوصف",
+    price: "السعر (FCFA)",
+    comparePrice: "السعر القديم",
+    stock: "المخزون",
+    category: "الفئة",
+    images: "الصور",
+    active: "نشط",
+    inactive: "غير نشط",
+    save: "حفظ",
+    cancel: "إلغاء",
+    delete: "حذف",
+    confirm: "تأكيد",
+    stockAlert: "تنبيه المخزون المنخفض",
+    outOfStock: "نفد المخزون",
+    inStock: "متوفر",
+
+    // Orders
+    newOrder: "طلب جديد",
+    orderNumber: "رقم الطلب",
+    customer: "العميل",
+    customerName: "اسم العميل",
+    customerPhone: "هاتف العميل",
+    customerAddress: "عنوان التوصيل",
+    orderStatus: "الحالة",
+    paymentMethod: "طريقة الدفع",
+    paymentStatus: "حالة الدفع",
+    total: "الإجمالي",
+    subtotal: "المجموع الجزئي",
+    deliveryFee: "رسوم التوصيل",
+    notes: "ملاحظات",
+    pending: "قيد الانتظار",
+    confirmed: "مؤكد",
+    processing: "جارٍ المعالجة",
+    shipped: "تم الشحن",
+    delivered: "تم التسليم",
+    cancelled: "ملغي",
+    paid: "مدفوع",
+    unpaid: "غير مدفوع",
+    cash: "نقداً",
+    orangeMoney: "أورانج موني",
+    wave: "ويف",
+    moovMoney: "موف موني",
+    addItem: "إضافة عنصر",
+    quantity: "الكمية",
+    generateInvoice: "إنشاء فاتورة PDF",
+
+    // Shop
+    shareShop: "مشاركة متجري",
+    copyLink: "نسخ الرابط",
+    qrCode: "رمز QR",
+    shopPreview: "معاينة المتجر",
+    customizeShop: "تخصيص",
+    theme: "المظهر",
+    language: "اللغة",
+
+    // Settings
+    profile: "الملف الشخصي",
+    shopInfo: "معلومات المتجر",
+    changePassword: "تغيير كلمة المرور",
+    currentPassword: "كلمة المرور الحالية",
+    newPassword: "كلمة المرور الجديدة",
+    updateProfile: "تحديث الملف",
+
+    // Admin
+    allVendors: "جميع البائعين",
+    allOrders: "جميع الطلبات",
+    allInvoices: "جميع الفواتير",
+    platformRevenue: "إيرادات المنصة",
+    activeVendors: "البائعون النشطون",
+    inactiveVendors: "البائعون غير النشطين",
+    totalVendors: "إجمالي البائعين",
+    generateMonthlyInvoices: "إنشاء فواتير الشهر",
+    exportData: "تصدير البيانات",
+
+    // Messages
+    success: "نجاح",
+    error: "خطأ",
+    loading: "جارٍ التحميل...",
+    noData: "لا توجد بيانات",
+    confirmDelete: "هل أنت متأكد من الحذف؟",
+    savedSuccess: "تم الحفظ بنجاح",
+    deletedSuccess: "تم الحذف بنجاح",
+    linkCopied: "تم نسخ الرابط!",
+    orderCreated: "تم إنشاء الطلب",
+    productAdded: "تم إضافة المنتج",
+    invoiceSent: "تم إرسال الفاتورة",
+
+    categories: {
+      clothing: "ملابس",
+      food: "طعام",
+      electronics: "إلكترونيات",
+      beauty: "الجمال والعناية",
+      home: "المنزل والديكور",
+      jewelry: "مجوهرات",
+      shoes: "أحذية",
+      bags: "حقائب وإكسسوارات",
+      other: "أخرى"
+    }
+  }
+};
+
+export const getT = (lang = 'fr') => (key) => {
+  const keys = key.split('.');
+  let value = translations[lang] || translations.fr;
+  for (const k of keys) {
+    value = value?.[k];
+  }
+  return value || key;
+};
