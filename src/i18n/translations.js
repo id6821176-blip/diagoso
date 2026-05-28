@@ -28,9 +28,9 @@ export const translations = {
 
     // Subscription
     subscriptionTitle: "Abonnement DIAGOSO",
-    subscriptionDesc: "En vous inscrivant, vous acceptez de payer 10 000 FCFA par mois pour utiliser la plateforme DIAGOSO. Une facture vous sera envoyée chaque fin de mois.",
-    subscriptionAccept: "J'accepte de payer 10 000 FCFA/mois",
-    subscriptionMonthly: "10 000 FCFA / mois",
+    subscriptionDesc: "En vous inscrivant, vous acceptez de payer 5 000 FCFA par mois pour utiliser la plateforme DIAGOSO. Une facture vous sera envoyée chaque fin de mois.",
+    subscriptionAccept: "J'accepte de payer 5 000 FCFA/mois",
+    subscriptionMonthly: "5 000 FCFA / mois",
     trialPeriod: "30 jours d'essai gratuit",
 
     // Dashboard
@@ -176,9 +176,9 @@ export const translations = {
 
     // Subscription
     subscriptionTitle: "DIAGOSO Sɔrɔli",
-    subscriptionDesc: "I ka tɔgɔ sigi tuma na, i b'i ka nɔ ta ko DIAGOSO baarakɛli kan i na sara wari 10 000 FCFA kalo kelen kelen na.",
-    subscriptionAccept: "N b'i ka nɔ ta, n na sara 10 000 FCFA kalo kelen kelen",
-    subscriptionMonthly: "10 000 FCFA / Kalo",
+    subscriptionDesc: "I ka tɔgɔ sigi tuma na, i b'i ka nɔ ta ko DIAGOSO baarakɛli kan i na sara wari 5 000 FCFA kalo kelen kelen na.",
+    subscriptionAccept: "N b'i ka nɔ ta, n na sara 5 000 FCFA kalo kelen kelen",
+    subscriptionMonthly: "5 000 FCFA / Kalo",
     trialPeriod: "Tile 30 kɛli dɔ nɔgɔma",
 
     // Dashboard

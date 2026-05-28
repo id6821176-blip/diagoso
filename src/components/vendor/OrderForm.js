@@ -55,7 +55,16 @@ export default function OrderForm({ onClose, onSaved, vendorId }) {
       );
       // decrease stock
       for (const i of items) {
-        if (i.product_id) await supabase.rpc('decrement_stock', { p_id: i.product_id, qty: Number(i.quantity) }).catch(() => {});
+        if (i.product_id) {
+          try {
+            const { data: prod } = await supabase
+              .from('products').select('stock_quantity').eq('id', i.product_id).single();
+            if (prod) {
+              const newQty = Math.max(0, prod.stock_quantity - Number(i.quantity));
+              await supabase.from('products').update({ stock_quantity: newQty }).eq('id', i.product_id);
+            }
+          } catch {}
+        }
       }
       toast.success(t('orderCreated') + ' 🎉');
       onSaved?.();

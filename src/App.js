@@ -5,31 +5,25 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { LangProvider } from './context/LangContext';
 import './styles/global.css';
 
-// Shared
-import Sidebar from './components/shared/Sidebar';
-import Header from './components/shared/Header';
-
-// Auth
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
-
-// Vendor
-import Dashboard from './pages/vendor/Dashboard';
-import Products from './pages/vendor/Products';
-import Orders from './pages/vendor/Orders';
+import Sidebar    from './components/shared/Sidebar';
+import Header     from './components/shared/Header';
+import Login      from './pages/auth/Login';
+import Register   from './pages/auth/Register';
+import Dashboard  from './pages/vendor/Dashboard';
+import Products   from './pages/vendor/Products';
+import Orders     from './pages/vendor/Orders';
 import OrderDetail from './pages/vendor/OrderDetail';
-import Invoices from './pages/vendor/Invoices';
-import Shop from './pages/vendor/Shop';
-import Settings from './pages/vendor/Settings';
+import Invoices   from './pages/vendor/Invoices';
+import Shop       from './pages/vendor/Shop';
+import Settings   from './pages/vendor/Settings';
 import Notifications from './pages/vendor/Notifications';
 import PublicShop from './pages/vendor/PublicShop';
-
-// Admin
+import Landing from './pages/Landing';
 import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminVendors from './pages/admin/AdminVendors';
-import AdminInvoices from './pages/admin/AdminInvoices';
+import AdminVendors   from './pages/admin/AdminVendors';
+import AdminInvoices  from './pages/admin/AdminInvoices';
 
-// ── Protected layout ──────────────────────────────────────────────────────
+/* ── Layout avec sidebar ── */
 function AppLayout({ children, title }) {
   return (
     <div className="app-layout">
@@ -42,150 +36,142 @@ function AppLayout({ children, title }) {
   );
 }
 
-// ── Route guards ──────────────────────────────────────────────────────────
+/* ── Écran de chargement ── */
+function Loader() {
+  return (
+    <div className="loading-screen">
+      <div className="spinner" />
+      <p>Chargement...</p>
+    </div>
+  );
+}
+
+/* ── Guards ── */
+
+// Pas connecté → login
 function RequireAuth({ children }) {
   const { user, loading } = useAuth();
-  if (loading) return <div className="loading-screen"><div className="spinner" /><p>Chargement...</p></div>;
-  if (!user) return <Navigate to="/login" replace />;
+  if (loading) return <Loader />;
+  if (!user)   return <Navigate to="/login" replace />;
   return children;
 }
 
+// Pas admin → dashboard vendeur
 function RequireAdmin({ children }) {
-  const { isAdmin, loading } = useAuth();
-  if (loading) return <div className="loading-screen"><div className="spinner" /></div>;
-  if (!isAdmin) return <Navigate to="/dashboard" replace />;
+  const { user, profile, loading } = useAuth();
+  if (loading)              return <Loader />;
+  if (!user)                return <Navigate to="/login" replace />;
+  if (!profile)             return <Loader />;
+  if (profile.role !== 'admin') return <Navigate to="/dashboard" replace />;
   return children;
 }
 
+// Admin → espace admin
+function RequireVendor({ children }) {
+  const { user, profile, loading } = useAuth();
+  if (loading)               return <Loader />;
+  if (!user)                 return <Navigate to="/login" replace />;
+  if (!profile)              return <Loader />;
+  if (profile.role === 'admin') return <Navigate to="/admin" replace />;
+  return children;
+}
+
+// Déjà connecté → redirige vers le bon espace
 function RedirectIfAuth({ children }) {
   const { user, profile, loading } = useAuth();
-  if (loading) return <div className="loading-screen"><div className="spinner" /></div>;
-  if (user) return <Navigate to={profile?.role === 'admin' ? '/admin' : '/dashboard'} replace />;
-  return children;
+  if (loading) return <Loader />;
+  if (!user)   return children;           // pas connecté → affiche login/register
+  if (!profile) return <Loader />;        // connecté mais profil en cours de chargement
+  return <Navigate to={profile.role === 'admin' ? '/admin' : '/dashboard'} replace />;
 }
 
-// ── Inner app (has access to auth context) ────────────────────────────────
+// Page racine
+function HomeRedirect() {
+  const { user, profile, loading } = useAuth();
+  if (loading)  return <Loader />;
+  if (!user)    return <Navigate to="/login" replace />;
+  if (!profile) return <Loader />;
+  return <Navigate to={profile.role === 'admin' ? '/admin' : '/dashboard'} replace />;
+}
+
+/* ── Routes ── */
 function AppRoutes() {
   return (
     <LangProvider>
       <Routes>
-        {/* Public */}
+        {/* Boutique publique — sans login */}
         <Route path="/boutique/:slug" element={<PublicShop />} />
 
         {/* Auth */}
-        <Route path="/login" element={<RedirectIfAuth><Login /></RedirectIfAuth>} />
+        <Route path="/login"    element={<RedirectIfAuth><Login /></RedirectIfAuth>} />
         <Route path="/register" element={<RedirectIfAuth><Register /></RedirectIfAuth>} />
 
-        {/* Vendor routes */}
+        {/* Accueil — Landing page publique */}
+        <Route path="/" element={<Landing />} />
+        {/* Redirection /app selon rôle */}
+        <Route path="/app" element={<HomeRedirect />} />
+
+        {/* ── Vendeur ── */}
         <Route path="/dashboard" element={
-          <RequireAuth>
-            <AppLayout title="Tableau de bord">
-              <Dashboard />
-            </AppLayout>
-          </RequireAuth>
-        } />
+          <RequireVendor><AppLayout title="Tableau de bord"><Dashboard /></AppLayout></RequireVendor>
+        }/>
         <Route path="/products" element={
-          <RequireAuth>
-            <AppLayout title="Produits">
-              <Products />
-            </AppLayout>
-          </RequireAuth>
-        } />
+          <RequireVendor><AppLayout title="Produits"><Products /></AppLayout></RequireVendor>
+        }/>
         <Route path="/orders" element={
-          <RequireAuth>
-            <AppLayout title="Commandes">
-              <Orders />
-            </AppLayout>
-          </RequireAuth>
-        } />
+          <RequireVendor><AppLayout title="Commandes"><Orders /></AppLayout></RequireVendor>
+        }/>
         <Route path="/orders/:id" element={
-          <RequireAuth>
-            <AppLayout title="Détail commande">
-              <OrderDetail />
-            </AppLayout>
-          </RequireAuth>
-        } />
+          <RequireVendor><AppLayout title="Détail commande"><OrderDetail /></AppLayout></RequireVendor>
+        }/>
         <Route path="/invoices" element={
-          <RequireAuth>
-            <AppLayout title="Factures abonnement">
-              <Invoices />
-            </AppLayout>
-          </RequireAuth>
-        } />
+          <RequireVendor><AppLayout title="Factures"><Invoices /></AppLayout></RequireVendor>
+        }/>
         <Route path="/shop" element={
-          <RequireAuth>
-            <AppLayout title="Ma Boutique">
-              <Shop />
-            </AppLayout>
-          </RequireAuth>
-        } />
+          <RequireVendor><AppLayout title="Ma Boutique"><Shop /></AppLayout></RequireVendor>
+        }/>
+
+        {/* Partagés */}
         <Route path="/settings" element={
-          <RequireAuth>
-            <AppLayout title="Paramètres">
-              <Settings />
-            </AppLayout>
-          </RequireAuth>
-        } />
+          <RequireAuth><AppLayout title="Paramètres"><Settings /></AppLayout></RequireAuth>
+        }/>
         <Route path="/notifications" element={
-          <RequireAuth>
-            <AppLayout title="Notifications">
-              <Notifications />
-            </AppLayout>
-          </RequireAuth>
-        } />
+          <RequireAuth><AppLayout title="Notifications"><Notifications /></AppLayout></RequireAuth>
+        }/>
 
-        {/* Admin routes */}
+        {/* ── Admin ── */}
         <Route path="/admin" element={
-          <RequireAdmin>
-            <AppLayout title="Administration">
-              <AdminDashboard />
-            </AppLayout>
-          </RequireAdmin>
-        } />
+          <RequireAdmin><AppLayout title="Administration"><AdminDashboard /></AppLayout></RequireAdmin>
+        }/>
         <Route path="/admin/vendors" element={
-          <RequireAdmin>
-            <AppLayout title="Gestion vendeurs">
-              <AdminVendors />
-            </AppLayout>
-          </RequireAdmin>
-        } />
+          <RequireAdmin><AppLayout title="Vendeurs"><AdminVendors /></AppLayout></RequireAdmin>
+        }/>
         <Route path="/admin/invoices" element={
-          <RequireAdmin>
-            <AppLayout title="Factures abonnements">
-              <AdminInvoices />
-            </AppLayout>
-          </RequireAdmin>
-        } />
+          <RequireAdmin><AppLayout title="Factures abonnements"><AdminInvoices /></AppLayout></RequireAdmin>
+        }/>
         <Route path="/admin/orders" element={
-          <RequireAdmin>
-            <AppLayout title="Toutes les commandes">
-              <Orders />
-            </AppLayout>
-          </RequireAdmin>
-        } />
+          <RequireAdmin><AppLayout title="Toutes les commandes"><Orders /></AppLayout></RequireAdmin>
+        }/>
         <Route path="/admin/settings" element={
-          <RequireAdmin>
-            <AppLayout title="Paramètres admin">
-              <Settings />
-            </AppLayout>
-          </RequireAdmin>
-        } />
+          <RequireAdmin><AppLayout title="Paramètres"><Settings /></AppLayout></RequireAdmin>
+        }/>
 
-        {/* Default redirects */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        {/* 404 */}
+        <Route path="*" element={<HomeRedirect />} />
       </Routes>
     </LangProvider>
   );
 }
 
-// ── Root App ───────────────────────────────────────────────────────────────
 export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <AppRoutes />
-        <Toaster position="top-right" toastOptions={{ duration: 3000, style: { fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: 13, borderRadius: 10 } }} />
+        <Toaster position="top-right" toastOptions={{
+          duration: 3000,
+          style: { fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: 13, borderRadius: 10 }
+        }} />
       </AuthProvider>
     </BrowserRouter>
   );

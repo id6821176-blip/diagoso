@@ -107,6 +107,7 @@ Si vous achetez le domaine `diagoso.ml` ou `diagoso.com` :
 ```
 diagoso/
 ├── public/
+│   │── landing.html
 │   └── index.html
 ├── src/
 │   ├── components/
