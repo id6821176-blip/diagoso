@@ -1,30 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-
-// Client Supabase avec clés directement ici pour éviter tout pb .env
-const supabase = createClient(
-  'https://flwiuhaqizjyypyxzkbn.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsd2l1aGFxaXpqeXlweXh6a2JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2MTQ0NTgsImV4cCI6MjA5NTE5MDQ1OH0.qiq6zf7S0FC51_Lu_uM8PFZvgmwMpRUDD7pO64qZIx4'
-);
-
-export { supabase };
-export const ADMIN_EMAIL = 'id6821176@gmail.com';
+import { supabase, ADMIN_EMAIL } from '../lib/supabase';
 
 const AuthContext = createContext({});
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser]       = useState(undefined); // undefined = pas encore vérifié
+  const [user, setUser]       = useState(undefined);
   const [profile, setProfile] = useState(null);
 
-  // Charge le profil une seule fois
   const loadProfile = async (uid) => {
     try {
       const { data } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', uid)
-        .single();
+        .from('profiles').select('*').eq('id', uid).single();
       setProfile(data || null);
     } catch {
       setProfile(null);
@@ -33,8 +20,6 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     let mounted = true;
-
-    // Vérifier la session une seule fois au démarrage
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!mounted) return;
       const u = session?.user || null;
@@ -42,7 +27,6 @@ export const AuthProvider = ({ children }) => {
       if (u) loadProfile(u.id);
     });
 
-    // Écouter les changements (login/logout)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (!mounted) return;
       if (event === 'SIGNED_IN' && session?.user) {
@@ -52,13 +36,9 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         setProfile(null);
       }
-      // ignorer tous les autres events (TOKEN_REFRESHED etc.)
     });
 
-    return () => {
-      mounted = false;
-      subscription.unsubscribe();
-    };
+    return () => { mounted = false; subscription.unsubscribe(); };
   }, []);
 
   const signIn = async ({ email, password }) => {
@@ -95,22 +75,17 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (updates) => {
     const { data, error } = await supabase
-      .from('profiles').update(updates)
-      .eq('id', user.id).select().single();
+      .from('profiles').update(updates).eq('id', user.id).select().single();
     if (error) throw error;
     setProfile(data);
     return data;
   };
 
-  // undefined = on ne sait pas encore (session en cours de vérification)
-  // null = pas connecté
   const loading = user === undefined;
 
   return (
     <AuthContext.Provider value={{
-      user: user || null,
-      profile,
-      loading,
+      user: user || null, profile, loading,
       isAdmin:  profile?.role === 'admin',
       isVendor: profile?.role === 'vendor',
       signIn, signUp, signOut, updateProfile,
