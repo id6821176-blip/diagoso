@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
@@ -7,6 +7,7 @@ import './styles/global.css';
 
 import Sidebar       from './components/shared/Sidebar';
 import Header        from './components/shared/Header';
+import BottomNav     from './components/shared/BottomNav';
 import Landing       from './pages/Landing';
 import Login         from './pages/auth/Login';
 import Register      from './pages/auth/Register';
@@ -23,14 +24,17 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminVendors   from './pages/admin/AdminVendors';
 import AdminInvoices  from './pages/admin/AdminInvoices';
 
+/* ── Layout principal avec sidebar + header + bottom nav ── */
 function AppLayout({ children, title }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="app-layout">
-      <Sidebar />
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="main-content">
-        <Header title={title} />
+        <Header title={title} onMenuClick={() => setSidebarOpen(true)} />
         {children}
       </div>
+      <BottomNav />
     </div>
   );
 }
@@ -38,8 +42,6 @@ function AppLayout({ children, title }) {
 function Loader() {
   return <div className="loading-screen"><div className="spinner" /><p>Chargement...</p></div>;
 }
-
-/* ── Guards ── */
 
 function RequireAuth({ children }) {
   const { user, loading } = useAuth();
@@ -66,7 +68,6 @@ function RequireVendor({ children }) {
   return children;
 }
 
-// Si connecté → redirige vers bon espace, sinon → affiche enfant (login/register)
 function RedirectIfAuth({ children }) {
   const { user, profile, loading } = useAuth();
   if (loading)  return <Loader />;
@@ -75,18 +76,26 @@ function RedirectIfAuth({ children }) {
   return <Navigate to={profile.role === 'admin' ? '/admin' : '/dashboard'} replace />;
 }
 
+function HomeRedirect() {
+  const { user, profile, loading } = useAuth();
+  if (loading)  return <Loader />;
+  if (!user)    return <Navigate to="/login" replace />;
+  if (!profile) return <Loader />;
+  return <Navigate to={profile.role === 'admin' ? '/admin' : '/dashboard'} replace />;
+}
+
 function AppRoutes() {
   return (
     <LangProvider>
       <Routes>
-
-        {/* ── PUBLIQUES — jamais de redirection ── */}
+        {/* ── PUBLIQUES ── */}
         <Route path="/"               element={<Landing />} />
         <Route path="/boutique/:slug" element={<PublicShop />} />
 
         {/* ── AUTH ── */}
         <Route path="/login"    element={<RedirectIfAuth><Login /></RedirectIfAuth>} />
         <Route path="/register" element={<RedirectIfAuth><Register /></RedirectIfAuth>} />
+        <Route path="/app"      element={<HomeRedirect />} />
 
         {/* ── VENDEUR ── */}
         <Route path="/dashboard"  element={<RequireVendor><AppLayout title="Tableau de bord"><Dashboard /></AppLayout></RequireVendor>} />
@@ -107,9 +116,8 @@ function AppRoutes() {
         <Route path="/admin/orders"   element={<RequireAdmin><AppLayout title="Commandes"><Orders /></AppLayout></RequireAdmin>} />
         <Route path="/admin/settings" element={<RequireAdmin><AppLayout title="Paramètres"><Settings /></AppLayout></RequireAdmin>} />
 
-        {/* 404 → landing */}
+        {/* 404 */}
         <Route path="*" element={<Navigate to="/" replace />} />
-
       </Routes>
     </LangProvider>
   );
@@ -120,13 +128,10 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <AppRoutes />
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 3000,
-            style: { fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: 13, borderRadius: 10 }
-          }}
-        />
+        <Toaster position="top-center" toastOptions={{
+          duration: 3000,
+          style: { fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: 13, borderRadius: 10, maxWidth: '90vw' }
+        }} />
       </AuthProvider>
     </BrowserRouter>
   );
