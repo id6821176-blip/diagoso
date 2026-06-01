@@ -109,12 +109,12 @@ export default function AdminDashboard() {
       {/* Revenue calc */}
       <div style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))', borderRadius: 16, padding: 24, marginBottom: 24, color: 'white' }}>
         <h3 style={{ fontWeight: 700, marginBottom: 4 }}>💰 Projection revenus plateforme</h3>
-        <p style={{ opacity: 0.8, fontSize: 13, marginBottom: 16 }}>Basé sur {stats.active} vendeurs actifs × 10 000 FCFA/mois</p>
+        <p style={{ opacity: 0.8, fontSize: 13, marginBottom: 16 }}>Basé sur {stats.active} vendeurs actifs × 5 000 FCFA/mois</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
           {[
-            { label: 'Ce mois', value: stats.active * 10000 },
-            { label: 'Trimestre', value: stats.active * 10000 * 3 },
-            { label: 'Année', value: stats.active * 10000 * 12 }
+            { label: 'Ce mois', value: stats.active * 5000 },
+            { label: 'Trimestre', value: stats.active * 5000 * 3 },
+            { label: 'Année', value: stats.active * 5000 * 12 }
           ].map(item => (
             <div key={item.label} style={{ background: 'rgba(255,255,255,0.15)', borderRadius: 12, padding: 14 }}>
               <div style={{ fontSize: 11, opacity: 0.8, marginBottom: 4 }}>{item.label}</div>
